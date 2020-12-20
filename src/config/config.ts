@@ -1,7 +1,6 @@
 /**
  * Discord bot config.
  *
- * Revisions to this file should not be committed to the repository.
  */
 export type BotConfig = {
   /** Prefix used for bot commands. */
