@@ -1,6 +1,6 @@
 import { Message } from 'discord.js';
 import { Command } from './commands/command';
-import { GreetCommand } from './commands/greet';
+import { CovidCommand } from './commands/covid';
 import { HelpCommand } from './commands/help';
 import { CommandContext } from './models/command_context';
 import { reactor } from './reactions/reactor';
@@ -14,7 +14,7 @@ export class CommandHandler {
   constructor(prefix: string) {
     const commandClasses = [
       // TODO: Add more commands here.
-      GreetCommand,
+      CovidCommand
     ];
 
     this.commands = commandClasses.map((CommandClass) => new CommandClass());

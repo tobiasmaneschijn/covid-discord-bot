@@ -13,6 +13,7 @@ validateConfig(config);
 
 const commandHandler = new CommandHandler(config.prefix);
 
+
 const client = new Discord.Client();
 
 client.on('ready', () => {
