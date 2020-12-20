@@ -1,5 +1,4 @@
 ![Maintained][maintained-badge]
-[![Travis Build Status][build-badge]][build]
 [![Make a pull request][prs-badge]][prs]
 [![License](http://img.shields.io/badge/Licence-MIT-brightgreen.svg)](LICENSE.md)
 
