@@ -49,7 +49,7 @@ export class CommandHandler {
 
 
     if (!matchedCommand) {
-      await message.reply("I don't recognize that command. Try !help.");
+      await message.reply("I don't recognize that command. Try !corona help.");
       await reactor.failure(message);
     } else if (!allowedCommands.includes(matchedCommand)) {
       await message.reply("you aren't allowed to use that command. Try !corona help.");

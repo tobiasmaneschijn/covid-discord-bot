@@ -23,7 +23,7 @@ export class HelpCommand implements Command {
       await commandContext.originalMessage.reply(
         `here is a list of commands you can run: ${commandNames.join(
           ', ',
-        )}. Try !help ${commandNames[0]} to learn more about one of them.`,
+        )}. Try !corona help ${commandNames[0]} to learn more about one of them.`,
       );
       return;
     }
@@ -33,7 +33,7 @@ export class HelpCommand implements Command {
     );
     if (!matchedCommand) {
       await commandContext.originalMessage.reply(
-        "I don't know about that command :(. Try !help to find all commands you can use.",
+        "I don't know about that command :(. Try !corona help to find all commands you can use.",
       );
       throw Error('Unrecognized command');
     }
