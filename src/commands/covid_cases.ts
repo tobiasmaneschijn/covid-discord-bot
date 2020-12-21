@@ -2,6 +2,10 @@ import { CommandContext } from '../models/command_context';
 import { Command } from './command';
 import axios from 'axios'
 import { Convert, CovidData } from "../models/covid_data";
+import { createChart } from "../helpers/chart_helper";
+import { ChartData } from 'chart.js';
+import { MessageEmbed } from 'discord.js';
+
 
 export class CovidCasesCommand implements Command {
     commandNames = ['corona cases', ];
@@ -35,10 +39,7 @@ export class CovidCasesCommand implements Command {
         if (data != null) {
             const keys = Object.keys(data)
 
-
-
             var countryCode = "OWID_WRL";
-
 
             if (country != null) {
                 keys.forEach(code => {
@@ -56,6 +57,39 @@ export class CovidCasesCommand implements Command {
             }
             const countryText = country == "" || countryCode == "OWID_WRL" ? "worldwide!" : " in " + country;
             await parsedUserCommand.originalMessage.reply('There are currently ' + cases + " cases of covid-19 " + countryText);
+
+            
+            var countries : string[] = []
+            var totalCases : number[] = []
+
+
+                keys.forEach(code => {
+                    const loc = data[code]
+                    if(loc.totalCasesPerMillion != null){
+                        countries.push( loc.location)
+                        totalCases.push(loc.totalCasesPerMillion)
+                    }
+                });
+            
+
+            const chartData : ChartData = {
+                labels: countries,
+                datasets: [{
+                    label: "Total # of covid-19 cases per million",
+                    data: totalCases
+                }]
+            }  
+
+            const buffer = await createChart(25 * countries.length,1024, 'bar', chartData)
+            const embed = new MessageEmbed()
+            .setTitle('Covid-19 chart')
+            .setDescription('Total # of covid-19 cases per million')
+            .attachFiles([{name: "image.png", attachment:buffer}])
+            .setImage('attachment://image.png');
+
+            await parsedUserCommand.originalMessage.reply('', embed);
+
+
         }
 
         else {

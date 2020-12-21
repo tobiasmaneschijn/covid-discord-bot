@@ -7,7 +7,7 @@ export class CovidInfoCommand implements Command {
     commandNames = ['corona info'];
 
     getHelpMessage(commandPrefix: string): string {
-        return `Use ${commandPrefix}covid to get the latest Covid-19 news and data.`;
+        return `Use ${commandPrefix}corona cases <optional country> to get the latest Covid-19 news and data.`;
     }
 
     async run(parsedUserCommand: CommandContext): Promise<void> {

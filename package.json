@@ -23,7 +23,10 @@
     "dev": "nodemon --config nodemon.json src/server.ts"
   },
   "dependencies": {
+    "@types/chart.js": "^2.9.29",
     "axios": "^0.21.0",
+    "chart.js": "^2.9.4",
+    "chartjs-node-canvas": "^3.0.6",
     "discord.js": "12.3.x",
     "dotenv": "^8.2.0",
     "newsapi": "^2.4.1",
