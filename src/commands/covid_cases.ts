@@ -3,8 +3,8 @@ import { Command } from './command';
 import axios from 'axios'
 import { Convert, CovidData } from "../models/covid_data";
 
-export class CovidCommand implements Command {
-    commandNames = ['covid', 'corona', 'covid-19'];
+export class CovidCasesCommand implements Command {
+    commandNames = ['corona cases', ];
 
     getHelpMessage(commandPrefix: string): string {
         return `Use ${commandPrefix}covid to get the latest Covid-19 news and data.`;
@@ -19,7 +19,7 @@ export class CovidCommand implements Command {
             for (let index = 0; index < parameters.length; index++) {
                 const element = parameters[index];
 
-                if (index != 0) {
+                if (index > 1) {
                     country = country + " " + element;
                 }
 

@@ -20,8 +20,18 @@ export class CommandContext {
       .trim()
       .split(/ +/g);
 
-    this.parsedCommandName = splitMessage.shift()!.toLowerCase();
-    this.args = splitMessage;
+    const primaryCommand = splitMessage.shift();
+    const secondaryCommand = splitMessage.shift();
+
+    if (secondaryCommand == null) {
+      this.parsedCommandName = primaryCommand!.toLowerCase();
+    }
+    else {
+      this.parsedCommandName = primaryCommand!.toLowerCase() + " " + (secondaryCommand != undefined ? secondaryCommand.toLowerCase() : "");
+    }
+
+    console.log(this.parsedCommandName);
+    this.args = splitMessage; 
     this.originalMessage = message;
   }
 }

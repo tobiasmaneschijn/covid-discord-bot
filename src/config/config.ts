@@ -12,7 +12,7 @@ export type BotConfig = {
 };
 
 export const config: BotConfig = {
-  prefix: '!!', // Command prefix. ex: !help
+  prefix: '!', // Command prefix. ex: !help
   botOwnerRoleName: 'bot-owner',
   enableReactions: true,
 };

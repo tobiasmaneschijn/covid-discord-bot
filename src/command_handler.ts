@@ -1,6 +1,7 @@
 import { Message } from 'discord.js';
 import { Command } from './commands/command';
-import { CovidCommand } from './commands/covid';
+import { CovidCasesCommand } from './commands/covid_cases';
+import { CovidInfoCommand } from './commands/corona_info';
 import { HelpCommand } from './commands/help';
 import { CommandContext } from './models/command_context';
 import { reactor } from './reactions/reactor';
@@ -14,7 +15,8 @@ export class CommandHandler {
   constructor(prefix: string) {
     const commandClasses = [
       // TODO: Add more commands here.
-      CovidCommand
+      CovidCasesCommand,
+      CovidInfoCommand
     ];
 
     this.commands = commandClasses.map((CommandClass) => new CommandClass());
@@ -27,8 +29,9 @@ export class CommandHandler {
     if (message.author.bot || !this.isCommand(message)) {
       return;
     }
-
+    
     const commandContext = new CommandContext(message, this.prefix);
+
 
     const allowedCommands = this.commands.filter((command) =>
       command.hasPermissionToRun(commandContext),
@@ -36,12 +39,20 @@ export class CommandHandler {
     const matchedCommand = this.commands.find((command) =>
       command.commandNames.includes(commandContext.parsedCommandName),
     );
+    
+    const firstCommand = commandContext.parsedCommandName.split(" ")[0] ;
+    
+   if(firstCommand != "corona" && firstCommand != "covid"){
+    console.log("Not a valid command");
+     return
+   }
+
 
     if (!matchedCommand) {
       await message.reply("I don't recognize that command. Try !help.");
       await reactor.failure(message);
     } else if (!allowedCommands.includes(matchedCommand)) {
-      await message.reply("you aren't allowed to use that command. Try !help.");
+      await message.reply("you aren't allowed to use that command. Try !corona help.");
       await reactor.failure(message);
     } else {
       await matchedCommand

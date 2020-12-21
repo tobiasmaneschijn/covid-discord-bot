@@ -2,7 +2,7 @@ import { CommandContext } from '../models/command_context';
 import { Command } from './command';
 
 export class HelpCommand implements Command {
-  readonly commandNames = ['help', 'halp', 'hlep'];
+  readonly commandNames = ['corona help', 'corona'];
 
   private commands: Command[];
 
